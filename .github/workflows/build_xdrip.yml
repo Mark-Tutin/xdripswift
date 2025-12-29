@@ -167,7 +167,7 @@ jobs:
           (vars.SCHEDULED_BUILD != 'false' && github.event.schedule == '0 6 1 * *') ||
           (vars.SCHEDULED_SYNC != 'false' && needs.check_latest_from_upstream.outputs.NEW_COMMITS == 'true' )
         )
-    steps:
+     steps:
       - name: Select Xcode version
         run: "sudo xcode-select --switch /Applications/Xcode_16.4.app/Contents/Developer"
       
