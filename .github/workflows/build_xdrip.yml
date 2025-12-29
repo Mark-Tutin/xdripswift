@@ -232,7 +232,18 @@ jobs:
       # Sync the GitHub runner clock with the Windows time server (workaround as suggested in https://github.com/actions/runner/issues/2996)
       - name: Sync clock
         run: sudo sntp -sS time.windows.com
-      
+
+      # Fetch App Store signing certificates
+      - name: Fastlane Match (App Store)
+      run: bundle exec fastlane match appstore
+      env:
+        TEAMID: ${{ secrets.TEAMID }}
+        GH_PAT: ${{ secrets.GH_PAT }}
+        FASTLANE_KEY_ID: ${{ secrets.FASTLANE_KEY_ID }}
+        FASTLANE_ISSUER_ID: ${{ secrets.FASTLANE_ISSUER_ID }}
+        FASTLANE_KEY: ${{ secrets.FASTLANE_KEY }}
+        MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+    
       # Build signed Xdrip4iOS IPA file
       - name: Fastlane Build & Archive
         run: bundle exec fastlane build_xdrip4ios
